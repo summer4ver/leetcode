@@ -7,4 +7,4 @@ Language: Python
 ### Records
 
 * Easy
-    * [747. Largest Number At Least Twice of Others](summer4ver/leetcode/blob/master/Problems/Easy/747. Largest Number At Least Twice of Others.md) - 21/03/2020
+    * [747. Largest Number At Least Twice of Others](summer4ver/leetcode/blob/master/Problems/Easy/747.%20Largest%20Number%20At%20Least%20Twice%20of%20Others.md) - 21/03/2020
