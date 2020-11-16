@@ -64,3 +64,45 @@ select t1.employee from (
 )t1
 where s1 > s2;
 ```
+
+### 182. Duplicate Emails
+```
+select Email from Person
+group by Email
+having count(*) > 1
+
+select t1.email from (
+    select email , count(*) as cnt from person
+    group by email
+    having cnt > 1
+)t1
+```
+
+### 183. Customers Who Never Order
+```
+select name as customers from
+(
+    select c.name, o.customerid from customers c 
+    left join orders o on c.id = o.CustomerId
+)t1
+where customerid is null
+
+select c.name as Customers from customers c 
+left join orders o on c.id = o.CustomerId
+where o.customerid is null
+
+SELECT A.Name as Customers from Customers A
+LEFT JOIN Orders B on  a.Id = B.CustomerId
+WHERE b.CustomerId is NULL
+
+SELECT A.Name from Customers A
+WHERE A.Id NOT IN (SELECT B.CustomerId from Orders B)
+```
+
+###
+```
+```
+
+###
+```
+```
