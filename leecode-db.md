@@ -1,3 +1,11 @@
+Leecode database: [URL](https://leetcode.com/problemset/database/)
+Start: 15/11/2020
+End:
+
+### Interesting....
+`You can't specify target table 'person' for update in FROM clause`
+-- you can't modify the same table which you use in the SELECT part.
+
 ### 175. Combine Two Tables
 ```
 select person.firstname, person.lastname, address.city, address.state 
@@ -99,6 +107,76 @@ SELECT A.Name from Customers A
 WHERE A.Id NOT IN (SELECT B.CustomerId from Orders B)
 ```
 
+### 184. Department Highest Salary
+```
+select department,Employee,Salary
+from(
+    select 
+    d.name as Department, e.name as Employee, e.salary as Salary, 
+    DENSE_RANK() OVER(PARTITION BY e.departmentid ORDER BY e.salary desc) as "rank"
+    from employee e left join department d
+    on e.departmentid = d.id
+)t1
+where t1.rank = 1 and t1.Department is not null
+```
+
+### 185. Department Top Three Salaries
+```
+select department,Employee,Salary
+from(
+    select 
+    d.name as Department, e.name as Employee, e.salary as Salary, 
+    DENSE_RANK() OVER(PARTITION BY e.departmentid ORDER BY e.salary desc) as "rank"
+    from employee e left join department d
+    on e.departmentid = d.id
+)t1
+where t1.rank <= 3 and t1.Department is not null
+
+
+SELECT
+    d.Name AS 'Department', e1.Name AS 'Employee', e1.Salary
+FROM
+    Employee e1
+        JOIN
+    Department d ON e1.DepartmentId = d.Id
+WHERE
+    3 > (SELECT
+            COUNT(DISTINCT e2.Salary)
+        FROM
+            Employee e2
+        WHERE
+            e2.Salary > e1.Salary
+                AND e1.DepartmentId = e2.DepartmentId
+        )
+;
+```
+### 196. Delete Duplicate Emails
+```
+delete P1
+from Person p1, Person P2
+where p1.email = p2.email 
+and p1.id > p2.id
+```
+
+### 197. Rising Temperature
+```
+SELECT t1.Id FROM weather t1, weather t2
+WHERE subdate(t1.recordDate, 1) = t2.recordDate  AND t1.Temperature > t2.Temperature
+
+subdate: https://www.w3schools.com/sql/func_mysql_subdate.asp
+```
+
+### 262. Trips and Users***
+```
+select t.Request_at Day,
+       ROUND((count(IF(t.status!='completed',TRUE,null))/count(*)),2) as 'Cancellation Rate'
+from Trips t where 
+t.Client_Id in (Select Users_Id from Users where Banned='No') 
+and t.Driver_Id in (Select Users_Id from Users where Banned='No')
+and t.Request_at between '2013-10-01' and '2013-10-03'
+group by t.Request_at;
+```
+
 ###
 ```
 ```
@@ -106,3 +184,8 @@ WHERE A.Id NOT IN (SELECT B.CustomerId from Orders B)
 ###
 ```
 ```
+
+###
+```
+```
+
