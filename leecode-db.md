@@ -1,9 +1,12 @@
 Leecode database: [URL](https://leetcode.com/problemset/database/)
+
 Start: 15/11/2020
+
 End:
 
 ### Interesting....
 `You can't specify target table 'person' for update in FROM clause`
+
 -- you can't modify the same table which you use in the SELECT part.
 
 ### 175. Combine Two Tables
